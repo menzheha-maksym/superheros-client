@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchHeroImage, fetchHeroImagesIds } from "../api/heroAPI";
+import styles from "./HeroPreview.module.css";
 
 interface HeroPreviewProps {
   id: number;
@@ -28,9 +29,18 @@ const HeroPreview: React.FC<HeroPreviewProps> = ({ id, nickname }) => {
 
   return (
     <>
-      <div>{id}</div>
-      {lastImageSrc ? <img src={lastImageSrc} alt="hero last" /> : null}
-      <div>{nickname}</div>
+      <div className={styles["container"]}>
+        <div>
+          {lastImageSrc ? (
+            <img
+              src={lastImageSrc}
+              className={styles["hero-image"]}
+              alt="hero last"
+            />
+          ) : null}
+          <div>nickname: {nickname}</div>
+        </div>
+      </div>
     </>
   );
 };
