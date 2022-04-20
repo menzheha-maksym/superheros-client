@@ -1,0 +1,8 @@
+.details-container {
+  display: flex;
+  justify-content: center;
+}
+.latest-image {
+  width: 400px;
+  height: 400px;
+}
