@@ -20,11 +20,10 @@ const HeroDetails: React.FC<HeroDetailsProps> = ({}) => {
   return (
     <>
       <div>
-        {" "}
         {hero ? (
           <div>
             <div>Nickname: {hero.nickname}</div>
-            <div>Realname: {hero.real_name}</div>
+            <div>Real name: {hero.real_name}</div>
             <div>Origin description: {hero.origin_description}</div>
             <div>Superpowers: {hero.superpowers}</div>
             <div>Catch phrase: {hero.catch_phrase}</div>
