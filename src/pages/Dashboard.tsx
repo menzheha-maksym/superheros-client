@@ -27,11 +27,17 @@ export default function Dashboard() {
     <div>
       <div>Superheros</div>
       <div className={styles["heros-container"]}>
-        {heros?.map((hero, i) => {
-          return (
-            <HeroPreview key={hero.id} id={hero.id} nickname={hero.nickname} />
-          );
-        })}
+        {heros
+          ? heros.map((hero, i) => {
+              return (
+                <HeroPreview
+                  key={hero.id}
+                  id={hero.id}
+                  nickname={hero.nickname}
+                />
+              );
+            })
+          : null}
       </div>
       <Pagination
         itemsCount={itemsCount}

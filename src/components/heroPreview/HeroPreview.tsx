@@ -37,7 +37,11 @@ const HeroPreview: React.FC<HeroPreviewProps> = ({ id, nickname }) => {
         <div>
           {lastImageSrc ? (
             <HeroLastImage heroId={id} imageStyle={styles["hero-image"]} />
-          ) : null}
+          ) : (
+            <div className={styles["image-placeholder"]}>
+              <span>currenty there is no hero image </span>
+            </div>
+          )}
           <div className={styles["nickname"]}>nickname: {nickname}</div>
           <button
             className={styles["view-details"]}
