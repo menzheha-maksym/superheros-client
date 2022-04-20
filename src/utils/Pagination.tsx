@@ -36,8 +36,6 @@ const Pagination: React.FC<PaginationProps> = ({
     } else {
       setDisableNextButton(false);
     }
-
-    console.log(skip);
   }, [itemsCount, itemsPerPage, skip]);
 
   return (
