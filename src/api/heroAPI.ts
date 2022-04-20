@@ -1,0 +1,19 @@
+import { Hero } from "../interfaces/Hero";
+
+export function fetchHeros() {
+  return new Promise<Hero[]>(async (resolve, reject) => {
+    await fetch("http://localhost:4000/heros")
+      .then((res) => res.json())
+      .then((json) => resolve(json))
+      .catch((err) => reject(err));
+  });
+}
+
+export function fetchHeroImagesIds(heroId: number) {
+  return new Promise<number[]>(async (resolve, reject) => {
+    await fetch(`http://localhost:4000/hero-image/hero/${heroId}`)
+      .then((res) => res.json())
+      .then((json) => resolve(json))
+      .catch((err) => reject(err));
+  });
+}
