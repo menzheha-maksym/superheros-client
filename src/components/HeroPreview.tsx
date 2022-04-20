@@ -38,7 +38,8 @@ const HeroPreview: React.FC<HeroPreviewProps> = ({ id, nickname }) => {
               alt="hero last"
             />
           ) : null}
-          <div>nickname: {nickname}</div>
+          <div className={styles["nickname"]}>nickname: {nickname}</div>
+          <button className={styles["view-details"]}>View details</button>
         </div>
       </div>
     </>
