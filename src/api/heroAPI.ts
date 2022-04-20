@@ -17,3 +17,12 @@ export function fetchHeroImagesIds(heroId: number) {
       .catch((err) => reject(err));
   });
 }
+
+export function fetchHeroImage(imageId: number) {
+  return new Promise<Blob>(async (resolve, reject) => {
+    await fetch(`http://localhost:4000/hero-image/${imageId}`)
+      .then((res) => res.blob())
+      .then((blob) => resolve(blob))
+      .catch((err) => reject(err));
+  });
+}

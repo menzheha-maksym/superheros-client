@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchHeroImagesIds } from "../api/heroAPI";
+import { fetchHeroImage, fetchHeroImagesIds } from "../api/heroAPI";
 
 interface HeroPreviewProps {
   id: number;
@@ -8,6 +8,7 @@ interface HeroPreviewProps {
 
 const HeroPreview: React.FC<HeroPreviewProps> = ({ id, nickname }) => {
   const [lastImageId, setLastImageId] = useState<number>();
+  const [lastImageSrc, setLastImageSrc] = useState<string>();
 
   useEffect(() => {
     fetchHeroImagesIds(id).then((res) => {
@@ -19,13 +20,16 @@ const HeroPreview: React.FC<HeroPreviewProps> = ({ id, nickname }) => {
 
   useEffect(() => {
     if (lastImageId) {
+      fetchHeroImage(lastImageId).then((blob) => {
+        setLastImageSrc(URL.createObjectURL(blob));
+      });
     }
   }, [lastImageId]);
 
   return (
     <>
       <div>{id}</div>
-
+      {lastImageSrc ? <img src={lastImageSrc} alt="hero last" /> : null}
       <div>{nickname}</div>
     </>
   );
