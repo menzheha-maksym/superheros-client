@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { fetchHerosWithPagiantion } from "../api/heroAPI";
-import HeroPreview from "../components/HeroPreview";
+import HeroPreview from "../components/heroPreview/HeroPreview";
 import { Hero } from "../interfaces/Hero";
 import Pagination from "../utils/Pagination";
 import styles from "./Dashboard.module.css";
