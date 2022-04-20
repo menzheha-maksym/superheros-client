@@ -1,24 +1,37 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { fetchHeroById } from "../api/heroAPI";
 import { Hero } from "../interfaces/Hero";
 // import styles from "./HeroDetails.module.css";
 
 interface HeroDetailsProps {}
 
 const HeroDetails: React.FC<HeroDetailsProps> = ({}) => {
-  // console.log(hero);
-
-  const params = useParams();
+  const { id } = useParams();
 
   const [hero, setHero] = useState<Hero>();
 
-  console.log(params);
-
-  useEffect(() => {}, []);
+  useEffect(() => {
+    fetchHeroById(Number(id)).then((hero) => {
+      setHero(hero);
+    });
+  }, [id]);
 
   return (
     <>
-      <div>hero</div>
+      <div>
+        {" "}
+        {hero ? (
+          <div>
+            <div>Nickname: {hero.nickname}</div>
+            <div>Realname: {hero.real_name}</div>
+            <div>Origin description: {hero.origin_description}</div>
+            <div>Superpowers: {hero.superpowers}</div>
+            <div>Catch phrase: {hero.catch_phrase}</div>
+            <div>And images will be here...</div>
+          </div>
+        ) : null}
+      </div>
     </>
   );
 };

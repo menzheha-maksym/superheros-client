@@ -22,6 +22,15 @@ export function fetchHerosWithPagiantion(limit = 5, skip = 0) {
   );
 }
 
+export function fetchHeroById(id: number) {
+  return new Promise<Hero>(async (resolve, reject) => {
+    await fetch(`http://localhost:4000/heros/${id}`)
+      .then((res) => res.json())
+      .then((json) => resolve(json))
+      .catch((err) => reject(err));
+  });
+}
+
 export function fetchHeroImagesIds(heroId: number) {
   return new Promise<number[]>(async (resolve, reject) => {
     await fetch(`http://localhost:4000/hero-image/hero/${heroId}`)
