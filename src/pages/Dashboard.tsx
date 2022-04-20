@@ -29,12 +29,7 @@ export default function Dashboard() {
       <div className={styles["heros-container"]}>
         {heros?.map((hero, i) => {
           return (
-            <HeroPreview
-              key={hero.id}
-              id={hero.id}
-              nickname={hero.nickname}
-              // hero={hero}
-            />
+            <HeroPreview key={hero.id} id={hero.id} nickname={hero.nickname} />
           );
         })}
       </div>

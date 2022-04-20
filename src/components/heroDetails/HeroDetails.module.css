@@ -3,8 +3,8 @@
   justify-content: center;
 }
 .latest-image {
-  width: 400px;
-  height: 400px;
+  max-width: 500px;
+  max-height: 500px;
 }
 
 .text-description {
@@ -17,4 +17,20 @@
 
 .text-description > div > span {
   font-weight: bold;
+}
+
+h2 {
+  text-align: center;
+}
+
+.hero-images-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.hero-image {
+  padding: 1rem;
+  max-width: 400px;
+  max-height: 400px;
 }

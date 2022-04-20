@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { fetchHeroById } from "../../api/heroAPI";
+import { fetchHeroById, fetchHeroImagesIds } from "../../api/heroAPI";
 import { Hero } from "../../interfaces/Hero";
+import HeroImage from "../HeroImage";
 import HeroLastImage from "../HeroLastImage";
 import styles from "./HeroDetails.module.css";
 
@@ -11,10 +12,17 @@ const HeroDetails: React.FC<HeroDetailsProps> = () => {
   const { id } = useParams();
 
   const [hero, setHero] = useState<Hero>();
+  const [imageIds, setImageIds] = useState<number[]>();
 
   useEffect(() => {
     fetchHeroById(Number(id)).then((hero) => {
       setHero(hero);
+    });
+  }, [id]);
+
+  useEffect(() => {
+    fetchHeroImagesIds(Number(id)).then((ids) => {
+      setImageIds(ids);
     });
   }, [id]);
 
@@ -43,11 +51,23 @@ const HeroDetails: React.FC<HeroDetailsProps> = () => {
               <div>
                 <span>Catch phrase:</span> {hero.catch_phrase}
               </div>
-              <div>And images will be here...</div>
             </div>
           </div>
         ) : null}
-        <span> </span>
+        <h2>Hero images</h2>
+        <div className={styles["hero-images-container"]}>
+          {imageIds
+            ? imageIds.map((id, i) => {
+                return (
+                  <HeroImage
+                    key={id}
+                    imageId={id}
+                    imageStyle={styles["hero-image"]}
+                  />
+                );
+              })
+            : null}
+        </div>
       </div>
     </>
   );
