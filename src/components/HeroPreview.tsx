@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { fetchHeroImage, fetchHeroImagesIds } from "../api/heroAPI";
+import HeroLastImage from "./HeroLastImage";
 import styles from "./HeroPreview.module.css";
 
 interface HeroPreviewProps {
@@ -35,11 +36,7 @@ const HeroPreview: React.FC<HeroPreviewProps> = ({ id, nickname }) => {
       <div className={styles["container"]}>
         <div>
           {lastImageSrc ? (
-            <img
-              src={lastImageSrc}
-              className={styles["hero-image"]}
-              alt="hero last"
-            />
+            <HeroLastImage heroId={id} imageStyle={styles["hero-image"]} />
           ) : null}
           <div className={styles["nickname"]}>nickname: {nickname}</div>
           <button
