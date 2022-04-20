@@ -27,16 +27,27 @@ const HeroDetails: React.FC<HeroDetailsProps> = () => {
               heroId={hero.id}
               imageStyle={styles["latest-image"]}
             />
-            <div>
-              <div>Nickname: {hero.nickname}</div>
-              <div>Real name: {hero.real_name}</div>
-              <div>Origin description: {hero.origin_description}</div>
-              <div>Superpowers: {hero.superpowers}</div>
-              <div>Catch phrase: {hero.catch_phrase}</div>
+            <div className={styles["text-description"]}>
+              <div>
+                <span>Nickname:</span> {hero.nickname}
+              </div>
+              <div>
+                <span>Real name:</span> {hero.real_name}
+              </div>
+              <div>
+                <span>Origin description:</span> {hero.origin_description}
+              </div>
+              <div>
+                <span>Superpowers:</span> {hero.superpowers}
+              </div>
+              <div>
+                <span>Catch phrase:</span> {hero.catch_phrase}
+              </div>
               <div>And images will be here...</div>
             </div>
           </div>
         ) : null}
+        <span> </span>
       </div>
     </>
   );
