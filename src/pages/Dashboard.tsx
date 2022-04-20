@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { fetchHeros } from "../api/heroAPI";
+import { fetchHerosWithPagiantion } from "../api/heroAPI";
 import HeroPreview from "../components/HeroPreview";
 import { Hero } from "../interfaces/Hero";
 import styles from "./Dashboard.module.css";
@@ -8,8 +8,8 @@ export default function Dashboard() {
   const [heros, setHeros] = useState<Hero[]>();
 
   useEffect(() => {
-    fetchHeros().then((heros) => {
-      setHeros(heros);
+    fetchHerosWithPagiantion().then((res) => {
+      setHeros(res.data);
     });
   }, []);
 

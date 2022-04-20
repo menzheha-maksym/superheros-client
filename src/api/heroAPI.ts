@@ -9,6 +9,19 @@ export function fetchHeros() {
   });
 }
 
+export function fetchHerosWithPagiantion(limit = 5, skip = 0) {
+  return new Promise<{ data: Hero[]; count: number }>(
+    async (resolve, reject) => {
+      await fetch(
+        `http://localhost:4000/heros/pagination?limit=${limit}&skip=${skip}`
+      )
+        .then((res) => res.json())
+        .then((json) => resolve(json))
+        .catch((err) => reject(err));
+    }
+  );
+}
+
 export function fetchHeroImagesIds(heroId: number) {
   return new Promise<number[]>(async (resolve, reject) => {
     await fetch(`http://localhost:4000/hero-image/hero/${heroId}`)
