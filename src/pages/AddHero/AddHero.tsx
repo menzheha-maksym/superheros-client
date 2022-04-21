@@ -12,12 +12,6 @@ export default function AddHero() {
   async function handleSubmit(e: any) {
     e.preventDefault();
 
-    console.log(nickname);
-    console.log(real_name);
-    console.log(origin_description);
-    console.log(superpowers);
-    console.log(catch_phrase);
-
     const hero = {
       nickname,
       real_name,

@@ -56,8 +56,8 @@ export function postCreateHero(hero: CreateHero) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(hero),
     })
-      .then((res) => res.blob())
-      .then((blob) => resolve(blob))
+      .then((res) => res.json())
+      .then((json) => resolve(json))
       .catch((err) => reject(err));
   });
 }
