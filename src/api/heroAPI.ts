@@ -50,7 +50,7 @@ export function fetchHeroImage(imageId: number) {
 }
 
 export function postCreateHero(hero: CreateHero) {
-  return new Promise<Blob>(async (resolve, reject) => {
+  return new Promise<Hero>(async (resolve, reject) => {
     await fetch(`http://localhost:4000/heros/create`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },

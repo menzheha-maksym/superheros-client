@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { postCreateHero } from "../../api/heroAPI";
 import styles from "./AddHero.module.css";
 
@@ -8,6 +9,8 @@ export default function AddHero() {
   const [origin_description, setOrigin_description] = useState<string>("");
   const [superpowers, setSuperpowers] = useState<string>("");
   const [catch_phrase, setCatch_phrase] = useState<string>("");
+
+  const navigate = useNavigate();
 
   async function handleSubmit(e: any) {
     e.preventDefault();
@@ -22,7 +25,7 @@ export default function AddHero() {
 
     try {
       await postCreateHero(hero).then((res) => {
-        console.log(res);
+        navigate(`/hero/${res.id}`);
       });
     } catch (err) {
       console.log(err);
