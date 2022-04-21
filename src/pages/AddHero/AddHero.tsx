@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { postCreateHero } from "../../api/heroAPI";
+import { postCreateHero, postHeroImage } from "../../api/heroAPI";
 import styles from "./AddHero.module.css";
 
 export default function AddHero() {
@@ -9,6 +9,7 @@ export default function AddHero() {
   const [origin_description, setOrigin_description] = useState<string>("");
   const [superpowers, setSuperpowers] = useState<string>("");
   const [catch_phrase, setCatch_phrase] = useState<string>("");
+  const [heroImg, setHeroImg] = useState<File | null>();
 
   const navigate = useNavigate();
 
@@ -24,8 +25,18 @@ export default function AddHero() {
     };
 
     try {
-      await postCreateHero(hero).then((res) => {
-        navigate(`/hero/${res.id}`);
+      await postCreateHero(hero).then(async (res) => {
+        if (!heroImg) {
+          navigate(`/hero/${res.id}`);
+        } else {
+          const data = new FormData();
+          data.append("heroId", String(res.id));
+          data.append("file", heroImg);
+          await postHeroImage(data).then((id) => {
+            //console.log(id);
+            navigate(`/hero/${res.id}`);
+          });
+        }
       });
     } catch (err) {
       console.log(err);
@@ -43,6 +54,7 @@ export default function AddHero() {
           required={true}
           onChange={(e) => setNickname(e.target.value)}
         />
+
         <span>Real name</span>
         <input
           type="text"
@@ -51,6 +63,7 @@ export default function AddHero() {
           required={true}
           onChange={(e) => setReal_name(e.target.value)}
         />
+
         <span>Origin description</span>
         <textarea
           rows={4}
@@ -59,6 +72,7 @@ export default function AddHero() {
           required={true}
           onChange={(e) => setOrigin_description(e.target.value)}
         />
+
         <span>Superpowers</span>
         <textarea
           rows={4}
@@ -67,6 +81,7 @@ export default function AddHero() {
           required={true}
           onChange={(e) => setSuperpowers(e.target.value)}
         />
+
         <span>Catch Phrase</span>
         <textarea
           rows={2}
@@ -74,6 +89,15 @@ export default function AddHero() {
           value={catch_phrase}
           required={true}
           onChange={(e) => setCatch_phrase(e.target.value)}
+        />
+
+        <span>Hero Image</span>
+        <input
+          type="file"
+          accept="image/*"
+          alt="hero"
+          name="hero_image"
+          onChange={(e) => setHeroImg(e.target.files![0])}
         />
 
         <button type="submit">Add a hero</button>
