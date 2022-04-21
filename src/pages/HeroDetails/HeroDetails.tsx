@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchHeroById, fetchHeroImagesIds } from "../../api/heroAPI";
 import { Hero } from "../../interfaces/Hero";
-import HeroImage from "../HeroImage";
-import HeroLastImage from "../HeroLastImage";
+import HeroImage from "../../components/HeroImage";
+import HeroLastImage from "../../components/HeroLastImage";
 import styles from "./HeroDetails.module.css";
 
 interface HeroDetailsProps {}
