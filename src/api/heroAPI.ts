@@ -1,4 +1,4 @@
-import { Hero } from "../interfaces/Hero";
+import { CreateHero, Hero } from "../interfaces/Hero";
 
 export function fetchHeros() {
   return new Promise<Hero[]>(async (resolve, reject) => {
@@ -43,6 +43,19 @@ export function fetchHeroImagesIds(heroId: number) {
 export function fetchHeroImage(imageId: number) {
   return new Promise<Blob>(async (resolve, reject) => {
     await fetch(`http://localhost:4000/hero-image/${imageId}`)
+      .then((res) => res.blob())
+      .then((blob) => resolve(blob))
+      .catch((err) => reject(err));
+  });
+}
+
+export function postCreateHero(hero: CreateHero) {
+  return new Promise<Blob>(async (resolve, reject) => {
+    await fetch(`http://localhost:4000/heros/create`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(hero),
+    })
       .then((res) => res.blob())
       .then((blob) => resolve(blob))
       .catch((err) => reject(err));

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { postCreateHero } from "../../api/heroAPI";
 import styles from "./AddHero.module.css";
 
 export default function AddHero() {
@@ -8,7 +9,7 @@ export default function AddHero() {
   const [superpowers, setSuperpowers] = useState<string>("");
   const [catch_phrase, setCatch_phrase] = useState<string>("");
 
-  function handleSubmit(e: any) {
+  async function handleSubmit(e: any) {
     e.preventDefault();
 
     console.log(nickname);
@@ -16,6 +17,22 @@ export default function AddHero() {
     console.log(origin_description);
     console.log(superpowers);
     console.log(catch_phrase);
+
+    const hero = {
+      nickname,
+      real_name,
+      origin_description,
+      superpowers,
+      catch_phrase,
+    };
+
+    try {
+      await postCreateHero(hero).then((res) => {
+        console.log(res);
+      });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (
@@ -26,6 +43,7 @@ export default function AddHero() {
           type="text"
           name="nickname"
           value={nickname}
+          required={true}
           onChange={(e) => setNickname(e.target.value)}
         />
         <span>Real name</span>
@@ -33,6 +51,7 @@ export default function AddHero() {
           type="text"
           name="real_name"
           value={real_name}
+          required={true}
           onChange={(e) => setReal_name(e.target.value)}
         />
         <span>Origin description</span>
@@ -40,6 +59,7 @@ export default function AddHero() {
           rows={4}
           name="origin_description"
           value={origin_description}
+          required={true}
           onChange={(e) => setOrigin_description(e.target.value)}
         />
         <span>Superpowers</span>
@@ -47,6 +67,7 @@ export default function AddHero() {
           rows={4}
           name="superpowers"
           value={superpowers}
+          required={true}
           onChange={(e) => setSuperpowers(e.target.value)}
         />
         <span>Catch Phrase</span>
@@ -54,6 +75,7 @@ export default function AddHero() {
           rows={2}
           name="superpowers"
           value={catch_phrase}
+          required={true}
           onChange={(e) => setCatch_phrase(e.target.value)}
         />
 
