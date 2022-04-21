@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { fetchHerosWithPagiantion } from "../../api/heroAPI";
 import HeroPreview from "../../components/heroPreview/HeroPreview";
 import { Hero } from "../../interfaces/Hero";
@@ -11,6 +12,8 @@ export default function Dashboard() {
   const [heros, setHeros] = useState<Hero[]>();
   const [itemsCount, setItemsCount] = useState<number>(0);
   const [skip, setSkip] = useState(0);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchHerosWithPagiantion(limit, skip).then((res) => {
@@ -25,7 +28,17 @@ export default function Dashboard() {
 
   return (
     <div>
-      <div>Superheros</div>
+      <h1>Superheros</h1>
+      <div>
+        <button
+          className={styles["add-hero-button"]}
+          onClick={() => {
+            navigate("/add-hero");
+          }}
+        >
+          ADD A HERO
+        </button>
+      </div>
       <div className={styles["heros-container"]}>
         {heros
           ? heros.map((hero, i) => {
