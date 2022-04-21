@@ -18,6 +18,10 @@
   margin-top: 1rem;
 }
 
+.form > textarea {
+  resize: none;
+}
+
 .form > button {
   margin-top: 1rem;
   padding: 1rem;

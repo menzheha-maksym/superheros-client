@@ -36,22 +36,22 @@ export default function AddHero() {
           onChange={(e) => setReal_name(e.target.value)}
         />
         <span>Origin description</span>
-        <input
-          type="text"
+        <textarea
+          rows={4}
           name="origin_description"
           value={origin_description}
           onChange={(e) => setOrigin_description(e.target.value)}
         />
         <span>Superpowers</span>
-        <input
-          type="text"
+        <textarea
+          rows={4}
           name="superpowers"
           value={superpowers}
           onChange={(e) => setSuperpowers(e.target.value)}
         />
         <span>Catch Phrase</span>
-        <input
-          type="text"
+        <textarea
+          rows={2}
           name="superpowers"
           value={catch_phrase}
           onChange={(e) => setCatch_phrase(e.target.value)}
