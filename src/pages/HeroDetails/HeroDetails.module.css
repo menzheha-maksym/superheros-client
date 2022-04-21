@@ -23,6 +23,12 @@ h2 {
   text-align: center;
 }
 
+.add-image-to-hero-button {
+  width: 100%;
+  padding: 0.5rem;
+  background-color: fuchsia;
+}
+
 .hero-images-container {
   display: flex;
   flex-wrap: wrap;
