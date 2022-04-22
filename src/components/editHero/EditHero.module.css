@@ -1,0 +1,17 @@
+.action-buttons {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.action-buttons > button {
+  padding: 1rem;
+  width: 30%;
+}
+
+.save-button {
+  background-color: greenyellow;
+}
+
+.cancel-button {
+  background-color: grey;
+}

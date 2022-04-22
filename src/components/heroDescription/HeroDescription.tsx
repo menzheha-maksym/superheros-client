@@ -3,10 +3,16 @@ import styles from "./HeroDescription.module.css";
 
 interface HeroDescriptionProps {
   hero: Hero;
+  setIsEditing: (isEditing: boolean) => void;
 }
 
-const HeroDescription: React.FC<HeroDescriptionProps> = ({ hero }) => {
-  function handleEditHero() {}
+const HeroDescription: React.FC<HeroDescriptionProps> = ({
+  hero,
+  setIsEditing,
+}) => {
+  function handleEditHero() {
+    setIsEditing(true);
+  }
 
   return (
     <div>

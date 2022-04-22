@@ -12,6 +12,7 @@ import HeroLastImage from "../../components/HeroLastImage";
 import styles from "./HeroDetails.module.css";
 import React from "react";
 import HeroDescription from "../../components/heroDescription/HeroDescription";
+import EditHero from "../../components/editHero/EditHero";
 
 interface HeroDetailsProps {}
 
@@ -22,6 +23,7 @@ const HeroDetails: React.FC<HeroDetailsProps> = () => {
   const fileInputRef = useRef<HTMLInputElement>();
 
   const [hero, setHero] = useState<Hero>();
+  const [isEditing, setIsEditing] = useState(false);
   const [imageIds, setImageIds] = useState<number[]>();
 
   useEffect(() => {
@@ -67,25 +69,33 @@ const HeroDetails: React.FC<HeroDetailsProps> = () => {
     }
   }
 
+  function updateIsEditing(isEditing: boolean): void {
+    setIsEditing(isEditing);
+  }
+
   return (
     <>
       <div>
         {hero ? (
-          <div className={styles["details-container"]}>
-            <HeroLastImage
-              heroId={hero.id}
-              imageStyle={styles["latest-image"]}
-            />
-            <div>
-              <HeroDescription hero={hero} />
-              <button
-                className={styles["delete-hero-button"]}
-                onClick={handleDeleteHero}
-              >
-                Delete hero
-              </button>
+          isEditing ? (
+            <EditHero hero={hero} />
+          ) : (
+            <div className={styles["details-container"]}>
+              <HeroLastImage
+                heroId={hero.id}
+                imageStyle={styles["latest-image"]}
+              />
+              <div>
+                <HeroDescription setIsEditing={updateIsEditing} hero={hero} />
+                <button
+                  className={styles["delete-hero-button"]}
+                  onClick={handleDeleteHero}
+                >
+                  Delete hero
+                </button>
+              </div>
             </div>
-          </div>
+          )
         ) : null}
 
         <h2>Hero images</h2>
