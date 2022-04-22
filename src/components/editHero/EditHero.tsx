@@ -28,6 +28,7 @@ const EditHero: React.FC<EditHeroProps> = ({ hero }) => {
         try {
           await updateHero(valuesToUpdate).then((res) => {
             console.log(res);
+            navigate(`/hero/${hero.id}`, { replace: true });
           });
         } catch (err) {
           console.log(err);
