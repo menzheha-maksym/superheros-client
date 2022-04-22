@@ -19,6 +19,12 @@
   font-weight: bold;
 }
 
+.delete-hero-button {
+  width: 100%;
+  padding: 0.5rem;
+  background-color: darkseagreen;
+}
+
 h2 {
   text-align: center;
 }

@@ -76,3 +76,16 @@ export function postHeroImage(data: FormData) {
       .catch((err) => reject(err));
   });
 }
+
+export function deleteHero(id: number) {
+  return new Promise(async (resolve, reject) => {
+    await fetch(`http://localhost:4000/heros/delete`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(id),
+    })
+      .then((res) => res.json())
+      .then((json) => resolve(json))
+      .catch((err) => reject(err));
+  });
+}
