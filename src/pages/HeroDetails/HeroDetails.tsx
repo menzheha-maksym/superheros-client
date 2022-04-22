@@ -75,21 +75,23 @@ const HeroDetails: React.FC<HeroDetailsProps> = () => {
               heroId={hero.id}
               imageStyle={styles["latest-image"]}
             />
-            <div className={styles["text-description"]}>
-              <div>
-                <span>Nickname:</span> {hero.nickname}
-              </div>
-              <div>
-                <span>Real name:</span> {hero.real_name}
-              </div>
-              <div>
-                <span>Origin description:</span> {hero.origin_description}
-              </div>
-              <div>
-                <span>Superpowers:</span> {hero.superpowers}
-              </div>
-              <div>
-                <span>Catch phrase:</span> {hero.catch_phrase}
+            <div>
+              <div className={styles["text-description"]}>
+                <div>
+                  <span>Nickname:</span> {hero.nickname}
+                </div>
+                <div>
+                  <span>Real name:</span> {hero.real_name}
+                </div>
+                <div>
+                  <span>Origin description:</span> {hero.origin_description}
+                </div>
+                <div>
+                  <span>Superpowers:</span> {hero.superpowers}
+                </div>
+                <div>
+                  <span>Catch phrase:</span> {hero.catch_phrase}
+                </div>
               </div>
               <button
                 className={styles["delete-hero-button"]}
