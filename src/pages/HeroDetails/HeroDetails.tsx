@@ -86,6 +86,12 @@ const HeroDetails: React.FC<HeroDetailsProps> = () => {
   return (
     <>
       <div>
+        <button
+          className={styles["go-back-button"]}
+          onClick={() => navigate("/")}
+        >
+          Go back
+        </button>
         {hero ? (
           isEditing ? (
             <EditHero hero={hero} />
