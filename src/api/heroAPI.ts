@@ -89,3 +89,16 @@ export function deleteHero(id: number) {
       .catch((err) => reject(err));
   });
 }
+
+export function updateHero(hero: Partial<Hero>) {
+  return new Promise(async (resolve, reject) => {
+    await fetch(`http://localhost:4000/heros/update`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(hero),
+    })
+      .then((res) => res.json())
+      .then((json) => resolve(json))
+      .catch((err) => reject(err));
+  });
+}

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { updateHero } from "../../api/heroAPI";
 import { Hero } from "../../interfaces/Hero";
 import styles from "./EditHero.module.css";
 
@@ -12,7 +13,7 @@ const EditHero: React.FC<EditHeroProps> = ({ hero }) => {
 
   const [updatedValues, setUpdatedValues] = useState<Partial<Hero>>();
 
-  function handleSave() {
+  async function handleSave() {
     if (updatedValues) {
       const valuesToUpdate = {};
 
@@ -22,7 +23,16 @@ const EditHero: React.FC<EditHeroProps> = ({ hero }) => {
         }
       }
 
-      console.log(valuesToUpdate);
+      if (Object.values(valuesToUpdate).length > 0) {
+        Object.assign(valuesToUpdate, { id: hero.id });
+        try {
+          await updateHero(valuesToUpdate).then((res) => {
+            console.log(res);
+          });
+        } catch (err) {
+          console.log(err);
+        }
+      }
     }
   }
   function handleCancel() {
