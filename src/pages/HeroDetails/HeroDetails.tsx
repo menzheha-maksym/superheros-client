@@ -43,6 +43,8 @@ const HeroDetails: React.FC<HeroDetailsProps> = () => {
     const edit = locatiton.pathname.split("/")[3];
     if (edit !== "edit") {
       setIsEditing(false);
+    } else {
+      setIsEditing(true);
     }
   }, [locatiton]);
 
@@ -77,10 +79,6 @@ const HeroDetails: React.FC<HeroDetailsProps> = () => {
     }
   }
 
-  function updateIsEditing(isEditing: boolean): void {
-    setIsEditing(isEditing);
-  }
-
   return (
     <>
       <div>
@@ -94,7 +92,7 @@ const HeroDetails: React.FC<HeroDetailsProps> = () => {
                 imageStyle={styles["latest-image"]}
               />
               <div>
-                <HeroDescription setIsEditing={updateIsEditing} hero={hero} />
+                <HeroDescription hero={hero} />
                 <button
                   className={styles["delete-hero-button"]}
                   onClick={handleDeleteHero}

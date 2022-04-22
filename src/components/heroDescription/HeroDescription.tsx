@@ -4,17 +4,12 @@ import styles from "./HeroDescription.module.css";
 
 interface HeroDescriptionProps {
   hero: Hero;
-  setIsEditing: (isEditing: boolean) => void;
 }
 
-const HeroDescription: React.FC<HeroDescriptionProps> = ({
-  hero,
-  setIsEditing,
-}) => {
+const HeroDescription: React.FC<HeroDescriptionProps> = ({ hero }) => {
   const navigate = useNavigate();
 
   function handleEditHero() {
-    setIsEditing(true);
     navigate(`/hero/${hero.id}/edit`);
   }
 
