@@ -9,3 +9,11 @@
 .text-description > div > span {
   font-weight: bold;
 }
+
+.edit-hero-button {
+  width: 90%;
+  padding: 0.5rem;
+  margin-left: 1rem;
+  margin-bottom: 1rem;
+  background-color: orange;
+}
