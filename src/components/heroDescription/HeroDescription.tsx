@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { Hero } from "../../interfaces/Hero";
 import styles from "./HeroDescription.module.css";
 
@@ -10,8 +11,11 @@ const HeroDescription: React.FC<HeroDescriptionProps> = ({
   hero,
   setIsEditing,
 }) => {
+  const navigate = useNavigate();
+
   function handleEditHero() {
     setIsEditing(true);
+    navigate(`/hero/${hero.id}/edit`);
   }
 
   return (

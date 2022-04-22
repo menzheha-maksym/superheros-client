@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import {
   deleteHero,
   fetchHeroById,
@@ -19,6 +19,7 @@ interface HeroDetailsProps {}
 const HeroDetails: React.FC<HeroDetailsProps> = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const locatiton = useLocation();
 
   const fileInputRef = useRef<HTMLInputElement>();
 
@@ -37,6 +38,13 @@ const HeroDetails: React.FC<HeroDetailsProps> = () => {
       setImageIds(ids);
     });
   }, [id]);
+
+  useEffect(() => {
+    const edit = locatiton.pathname.split("/")[3];
+    if (edit !== "edit") {
+      setIsEditing(false);
+    }
+  }, [locatiton]);
 
   async function handleAddImageToHero(e: any) {
     try {

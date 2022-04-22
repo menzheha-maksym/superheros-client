@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { Hero } from "../../interfaces/Hero";
 import styles from "./EditHero.module.css";
 
@@ -6,8 +7,12 @@ interface EditHeroProps {
 }
 
 const EditHero: React.FC<EditHeroProps> = ({ hero }) => {
+  const navigate = useNavigate();
+
   function handleSave() {}
-  function handleCancel() {}
+  function handleCancel() {
+    navigate(`/hero/${hero.id}`, { replace: true });
+  }
 
   return (
     <div>
