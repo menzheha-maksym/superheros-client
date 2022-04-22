@@ -13,4 +13,5 @@ TODO
   - [x] show all hero images
   - [x] add image to hero
   - [ ] edit hero
-  - [ ] delete hero
+  - [x] delete hero
+  - [ ] delete image from hero?????
