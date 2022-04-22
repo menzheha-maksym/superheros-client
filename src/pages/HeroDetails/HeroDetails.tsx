@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   deleteHero,
   fetchHeroById,
@@ -16,6 +16,7 @@ interface HeroDetailsProps {}
 
 const HeroDetails: React.FC<HeroDetailsProps> = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const fileInputRef = useRef<HTMLInputElement>();
 
@@ -57,7 +58,7 @@ const HeroDetails: React.FC<HeroDetailsProps> = () => {
     try {
       if (hero) {
         await deleteHero(hero.id).then((res) => {
-          console.log(res);
+          navigate("/", { replace: true });
         });
       }
     } catch (err) {
