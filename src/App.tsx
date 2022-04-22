@@ -13,6 +13,7 @@ function App() {
         <Route path="/" element={<Dashboard />} />
         <Route path="hero/:id" element={<HeroDetails />} />
         <Route path="hero/:id/edit" element={<HeroDetails />} />
+        <Route path="hero/:id/update" element={<HeroDetails />} />
         <Route path="add-hero" element={<AddHero />} />
       </Routes>
     </BrowserRouter>

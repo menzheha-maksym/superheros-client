@@ -40,13 +40,17 @@ const HeroDetails: React.FC<HeroDetailsProps> = () => {
   }, [id]);
 
   useEffect(() => {
-    const edit = locatiton.pathname.split("/")[3];
-    if (edit !== "edit") {
-      setIsEditing(false);
-    } else {
+    const thridParam = locatiton.pathname.split("/")[3];
+    if (thridParam === "edit") {
       setIsEditing(true);
+    } else if (thridParam === "update") {
+      setIsEditing(false);
+      setHero(locatiton.state as Hero);
+      navigate(`/hero/${id}`, { replace: true });
+    } else {
+      setIsEditing(false);
     }
-  }, [locatiton]);
+  }, [locatiton, id, navigate]);
 
   async function handleAddImageToHero(e: any) {
     try {
