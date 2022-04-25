@@ -2,7 +2,7 @@ TODO
 - [x] show heros
   - [x] with preview
   - [x] with pagination
-    - [ ] add page number
+    - [x] add page number
  
 
 - [x] add hero
