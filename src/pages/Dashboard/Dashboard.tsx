@@ -39,9 +39,10 @@ export default function Dashboard() {
           ADD A HERO
         </button>
       </div>
-      <div className={styles["heros-container"]}>
-        {heros
-          ? heros.map((hero, i) => {
+      {heros ? (
+        <div>
+          <div className={styles["heros-container"]}>
+            {heros.map((hero, i) => {
               return (
                 <HeroPreview
                   key={hero.id}
@@ -49,15 +50,16 @@ export default function Dashboard() {
                   nickname={hero.nickname}
                 />
               );
-            })
-          : null}
-      </div>
-      <Pagination
-        itemsCount={itemsCount}
-        itemsPerPage={limit}
-        updateSkip={updateSkip}
-        skip={skip}
-      />
+            })}
+          </div>
+          <Pagination
+            itemsCount={itemsCount}
+            itemsPerPage={limit}
+            updateSkip={updateSkip}
+            skip={skip}
+          />
+        </div>
+      ) : null}
     </div>
   );
 }
