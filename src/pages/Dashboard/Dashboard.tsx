@@ -7,7 +7,7 @@ import Pagination from "../../utils/Pagination";
 import styles from "./Dashboard.module.css";
 
 export default function Dashboard() {
-  const limit = 5;
+  const limit = 2;
 
   const [heros, setHeros] = useState<Hero[]>();
   const [itemsCount, setItemsCount] = useState<number>(0);
