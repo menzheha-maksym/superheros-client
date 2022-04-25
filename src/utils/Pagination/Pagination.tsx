@@ -40,6 +40,10 @@ const Pagination: React.FC<PaginationProps> = ({
   }, [itemsCount, itemsPerPage]);
 
   useEffect(() => {
+    updateSkip(activeButton * itemsPerPage - itemsPerPage);
+  }, [activeButton, itemsPerPage, updateSkip]);
+
+  useEffect(() => {
     if (skip - itemsPerPage < 0) {
       setDisablePrevButton(true);
     } else {
@@ -69,7 +73,11 @@ const Pagination: React.FC<PaginationProps> = ({
                     </button>
                   );
                 } else {
-                  return <button key={i}>{button}</button>;
+                  return (
+                    <button key={i} onClick={() => setActiveButton(i + 1)}>
+                      {button}
+                    </button>
+                  );
                 }
               })
             : null}
