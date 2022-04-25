@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { fetchHerosWithPagiantion } from "../../api/heroAPI";
 import HeroPreview from "../../components/heroPreview/HeroPreview";
 import { Hero } from "../../interfaces/Hero";
-import Pagination from "../../utils/Pagination";
+import Pagination from "../../utils/Pagination/Pagination";
 import styles from "./Dashboard.module.css";
 
 export default function Dashboard() {
