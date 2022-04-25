@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import styles from "./Pagination.module.css";
 
 interface PaginationProps {
   itemsCount: number;
@@ -54,25 +55,29 @@ const Pagination: React.FC<PaginationProps> = ({
 
   return (
     <>
-      <button disabled={disablePrevButton} onClick={previousButtonClick}>
-        previous
-      </button>
-      {buttons
-        ? buttons.map((button, i) => {
-            if (button === activeButton) {
-              return (
-                <button style={{ backgroundColor: "red" }} key={i}>
-                  {button}
-                </button>
-              );
-            } else {
-              return <button key={i}>{button}</button>;
-            }
-          })
-        : null}
-      <button disabled={disableNextButton} onClick={nextButtonClick}>
-        next
-      </button>
+      <div className={styles["container"]}>
+        <button disabled={disablePrevButton} onClick={previousButtonClick}>
+          previous
+        </button>
+        <div className={styles["number-buttons-container"]}>
+          {buttons
+            ? buttons.map((button, i) => {
+                if (button === activeButton) {
+                  return (
+                    <button className={styles["active-button"]} key={i}>
+                      {button}
+                    </button>
+                  );
+                } else {
+                  return <button key={i}>{button}</button>;
+                }
+              })
+            : null}
+        </div>
+        <button disabled={disableNextButton} onClick={nextButtonClick}>
+          next
+        </button>
+      </div>
     </>
   );
 };
