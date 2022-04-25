@@ -24,3 +24,21 @@
   margin-left: 1rem;
   background-color: darkseagreen;
 }
+
+.confirm-delete-container {
+  text-align: center;
+  width: 90%;
+  margin-left: 1rem;
+  background-color: darkseagreen;
+}
+.confirm-delete-container > button {
+  width: 50%;
+}
+
+.confirm-delete {
+  background-color: red;
+}
+
+.undo-delete {
+  background-color: cyan;
+}

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { deleteHero } from "../../api/heroAPI";
 import { Hero } from "../../interfaces/Hero";
@@ -11,6 +12,7 @@ const HeroDescriptionWithActions: React.FC<HeroDescriptionWithActionsProps> = ({
   hero,
 }) => {
   const navigate = useNavigate();
+  const [isDeleting, setIsDeleting] = useState(false);
 
   function handleEditHero() {
     navigate(`/hero/${hero.id}/edit`);
@@ -50,12 +52,30 @@ const HeroDescriptionWithActions: React.FC<HeroDescriptionWithActionsProps> = ({
       <button className={styles["edit-hero-button"]} onClick={handleEditHero}>
         Edit hero
       </button>
-      <button
-        className={styles["delete-hero-button"]}
-        onClick={handleDeleteHero}
-      >
-        Delete hero
-      </button>
+      {!isDeleting ? (
+        <button
+          className={styles["delete-hero-button"]}
+          onClick={() => setIsDeleting(true)}
+        >
+          Delete hero
+        </button>
+      ) : (
+        <div className={styles["confirm-delete-container"]}>
+          <div>Are you sure?</div>
+          <button
+            className={styles["confirm-delete"]}
+            onClick={handleDeleteHero}
+          >
+            YES
+          </button>
+          <button
+            className={styles["undo-delete"]}
+            onClick={() => setIsDeleting(false)}
+          >
+            NO
+          </button>
+        </div>
+      )}
     </div>
   );
 };
