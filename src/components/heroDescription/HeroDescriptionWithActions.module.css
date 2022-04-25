@@ -17,3 +17,10 @@
   margin-bottom: 1rem;
   background-color: orange;
 }
+
+.delete-hero-button {
+  width: 90%;
+  padding: 0.5rem;
+  margin-left: 1rem;
+  background-color: darkseagreen;
+}

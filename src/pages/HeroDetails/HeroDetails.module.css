@@ -13,13 +13,6 @@
   max-height: 500px;
 }
 
-.delete-hero-button {
-  width: 90%;
-  padding: 0.5rem;
-  margin-left: 1rem;
-  background-color: darkseagreen;
-}
-
 h2 {
   text-align: center;
 }

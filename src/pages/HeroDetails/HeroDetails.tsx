@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import {
-  deleteHero,
   fetchHeroById,
   fetchHeroImagesIds,
   postHeroImage,
@@ -71,18 +70,6 @@ const HeroDetails: React.FC<HeroDetailsProps> = () => {
     }
   }
 
-  async function handleDeleteHero() {
-    try {
-      if (hero) {
-        await deleteHero(hero.id).then((res) => {
-          navigate("/", { replace: true });
-        });
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
   return (
     <>
       <div>
@@ -103,12 +90,6 @@ const HeroDetails: React.FC<HeroDetailsProps> = () => {
               />
               <div>
                 <HeroDescriptionWithActions hero={hero} />
-                <button
-                  className={styles["delete-hero-button"]}
-                  onClick={handleDeleteHero}
-                >
-                  Delete hero
-                </button>
               </div>
             </div>
           )

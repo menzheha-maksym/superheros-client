@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { deleteHero } from "../../api/heroAPI";
 import { Hero } from "../../interfaces/Hero";
 import styles from "./HeroDescriptionWithActions.module.css";
 
@@ -13,6 +14,18 @@ const HeroDescriptionWithActions: React.FC<HeroDescriptionWithActionsProps> = ({
 
   function handleEditHero() {
     navigate(`/hero/${hero.id}/edit`);
+  }
+
+  async function handleDeleteHero() {
+    try {
+      if (hero) {
+        await deleteHero(hero.id).then((res) => {
+          navigate("/", { replace: true });
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (
@@ -36,6 +49,12 @@ const HeroDescriptionWithActions: React.FC<HeroDescriptionWithActionsProps> = ({
       </div>
       <button className={styles["edit-hero-button"]} onClick={handleEditHero}>
         Edit hero
+      </button>
+      <button
+        className={styles["delete-hero-button"]}
+        onClick={handleDeleteHero}
+      >
+        Delete hero
       </button>
     </div>
   );
