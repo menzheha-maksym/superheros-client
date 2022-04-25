@@ -10,7 +10,8 @@
   font-weight: bold;
 }
 
-.edit-hero-button {
+.edit-hero-button,
+.delete-hero-button {
   width: 90%;
   padding: 0.5rem;
   margin-left: 1rem;
@@ -18,10 +19,11 @@
   background-color: orange;
 }
 
+.edit-hero-button {
+  background-color: orange;
+}
+
 .delete-hero-button {
-  width: 90%;
-  padding: 0.5rem;
-  margin-left: 1rem;
   background-color: darkseagreen;
 }
 
