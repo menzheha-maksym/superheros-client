@@ -1,12 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import { Hero } from "../../interfaces/Hero";
-import styles from "./HeroDescription.module.css";
+import styles from "./HeroDescriptionWithActions.module.css";
 
-interface HeroDescriptionProps {
+interface HeroDescriptionWithActionsProps {
   hero: Hero;
 }
 
-const HeroDescription: React.FC<HeroDescriptionProps> = ({ hero }) => {
+const HeroDescriptionWithActions: React.FC<HeroDescriptionWithActionsProps> = ({
+  hero,
+}) => {
   const navigate = useNavigate();
 
   function handleEditHero() {
@@ -39,4 +41,4 @@ const HeroDescription: React.FC<HeroDescriptionProps> = ({ hero }) => {
   );
 };
 
-export default HeroDescription;
+export default HeroDescriptionWithActions;

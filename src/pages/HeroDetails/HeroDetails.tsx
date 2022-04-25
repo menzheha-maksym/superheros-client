@@ -11,7 +11,7 @@ import HeroImage from "../../components/HeroImage";
 import HeroLastImage from "../../components/HeroLastImage";
 import styles from "./HeroDetails.module.css";
 import React from "react";
-import HeroDescription from "../../components/heroDescription/HeroDescription";
+import HeroDescriptionWithActions from "../../components/heroDescription/HeroDescriptionWithActions";
 import EditHero from "../../components/editHero/EditHero";
 
 interface HeroDetailsProps {}
@@ -102,7 +102,7 @@ const HeroDetails: React.FC<HeroDetailsProps> = () => {
                 imageStyle={styles["latest-image"]}
               />
               <div>
-                <HeroDescription hero={hero} />
+                <HeroDescriptionWithActions hero={hero} />
                 <button
                   className={styles["delete-hero-button"]}
                   onClick={handleDeleteHero}
