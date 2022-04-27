@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { fetchHerosWithPagiantion } from "../../api/heroAPI";
 import HeroPreview from "../../components/heroPreview/HeroPreview";
 import { Hero } from "../../interfaces/Hero";
-import Pagination from "../../utils/Pagination";
+import Pagination from "../../utils/Pagination/Pagination";
 import styles from "./Dashboard.module.css";
 
 export default function Dashboard() {
@@ -39,9 +39,10 @@ export default function Dashboard() {
           ADD A HERO
         </button>
       </div>
-      <div className={styles["heros-container"]}>
-        {heros
-          ? heros.map((hero, i) => {
+      {heros ? (
+        <div>
+          <div className={styles["heros-container"]}>
+            {heros.map((hero, i) => {
               return (
                 <HeroPreview
                   key={hero.id}
@@ -49,15 +50,16 @@ export default function Dashboard() {
                   nickname={hero.nickname}
                 />
               );
-            })
-          : null}
-      </div>
-      <Pagination
-        itemsCount={itemsCount}
-        itemsPerPage={limit}
-        updateSkip={updateSkip}
-        skip={skip}
-      />
+            })}
+          </div>
+          <Pagination
+            itemsCount={itemsCount}
+            itemsPerPage={limit}
+            updateSkip={updateSkip}
+            skip={skip}
+          />
+        </div>
+      ) : null}
     </div>
   );
 }

@@ -2,7 +2,7 @@ TODO
 - [x] show heros
   - [x] with preview
   - [x] with pagination
-    - [ ] add page number
+    - [x] add page number
  
 
 - [x] add hero
@@ -15,3 +15,4 @@ TODO
   - [x] edit hero
   - [x] delete hero
   - [ ] delete image from hero?????
+  - [ ] go back with pagination
