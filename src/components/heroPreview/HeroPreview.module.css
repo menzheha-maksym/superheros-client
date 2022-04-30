@@ -5,6 +5,14 @@
   padding: 1rem;
   margin-bottom: 1rem;
 }
+
+.hero-image-container {
+  display: flex;
+  justify-content: center;
+  width: 300px;
+  height: 300px;
+}
+
 .hero-image {
   max-width: 300px;
   max-height: 300px;

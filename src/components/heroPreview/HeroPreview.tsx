@@ -26,13 +26,15 @@ const HeroPreview: React.FC<HeroPreviewProps> = ({ id, nickname }) => {
     <>
       <div className={styles["container"]}>
         <div>
-          {lastImageId ? (
-            <HeroLastImage heroId={id} imageStyle={styles["hero-image"]} />
-          ) : (
-            <div className={styles["image-placeholder"]}>
-              <span>currenty there is no hero image </span>
-            </div>
-          )}
+          <div className={styles["hero-image-container"]}>
+            {lastImageId ? (
+              <HeroLastImage heroId={id} imageStyle={styles["hero-image"]} />
+            ) : (
+              <div className={styles["image-placeholder"]}>
+                <span>currenty there is no hero image </span>
+              </div>
+            )}
+          </div>
           <div className={styles["nickname"]}>nickname: {nickname}</div>
           <button
             className={styles["view-details"]}
