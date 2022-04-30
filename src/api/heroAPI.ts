@@ -62,17 +62,14 @@ export function postCreateHero(hero: CreateHero) {
   });
 }
 
-export function postHeroImage(data: FormData) {
-  return new Promise<{ id: number } | void>(async (resolve, reject) => {
-    await fetch(`http://localhost:4000/hero-image/add`, {
-      method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "application/json" },
-      body: data,
+export function postHeroImage(heroId: number, imageForm: FormData) {
+  return new Promise<{ id: number }>(async (resolve, reject) => {
+    await fetch(`http://localhost:4000/hero-image/add/${heroId}`, {
+      method: "PUT",
+      body: imageForm,
     })
-      .then(() => resolve())
-      // .then((res) => res.json())       // unexpected end of input
-      // .then((json) => resolve(json))   // while works great in postman, returning id in json
+      .then((res) => res.json())
+      .then((json) => resolve(json))
       .catch((err) => reject(err));
   });
 }
