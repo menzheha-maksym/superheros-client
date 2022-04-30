@@ -61,13 +61,8 @@ const HeroDetails: React.FC<HeroDetailsProps> = () => {
         const data = new FormData();
         data.append("file", e.target.files[0]);
         await postHeroImage(hero.id, data).then((res) => {
-          console.log(res);
-          const ids = imageIds;
-          ids!.push(res.id);
-          setImageIds(ids);
-
-          // eslint-disable-next-line no-restricted-globals
-          location.reload();
+          setLastImageId(res.id);
+          setImageIds((ids) => [...ids!, res.id]);
         });
       }
     } catch (err) {
