@@ -14,5 +14,5 @@ TODO
   - [x] add image to hero
   - [x] edit hero
   - [x] delete hero
-  - [ ] delete image from hero?????
+  - [x] delete image from hero
   - [ ] go back with pagination
