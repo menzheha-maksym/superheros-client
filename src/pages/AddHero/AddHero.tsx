@@ -30,9 +30,8 @@ export default function AddHero() {
           navigate(`/hero/${res.id}`);
         } else {
           const data = new FormData();
-          data.append("heroId", String(res.id));
           data.append("file", heroImg);
-          await postHeroImage(data).then(() => {
+          await postHeroImage(res.id, data).then(() => {
             navigate(`/hero/${res.id}`);
           });
         }

@@ -59,12 +59,13 @@ const HeroDetails: React.FC<HeroDetailsProps> = () => {
     try {
       if (hero) {
         const data = new FormData();
-        data.append("heroId", String(hero.id));
         data.append("file", e.target.files[0]);
-        await postHeroImage(data).then((id) => {
-          //console.log(id);
-          // must add image id to ids
-          // but id is not being returned for unknown reason
+        await postHeroImage(hero.id, data).then((res) => {
+          console.log(res);
+          const ids = imageIds;
+          ids!.push(res.id);
+          setImageIds(ids);
+
           // eslint-disable-next-line no-restricted-globals
           location.reload();
         });
