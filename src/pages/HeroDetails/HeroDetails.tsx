@@ -129,7 +129,7 @@ const HeroDetails: React.FC<HeroDetailsProps> = () => {
         />
         <div className={styles["hero-images-container"]}>
           {imageIds
-            ? imageIds.map((id, i) => {
+            ? imageIds.reverse().map((id, i) => {
                 return (
                   <div key={id} className={styles["single-image-container"]}>
                     <HeroImage imageId={id} imageStyle={styles["hero-image"]} />
