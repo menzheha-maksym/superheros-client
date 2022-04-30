@@ -4,11 +4,13 @@ import { fetchHeroImage, fetchHeroImagesIds } from "../api/heroAPI";
 interface HeroLastImageProps {
   heroId: number;
   imageStyle?: string | undefined;
+  imageSrcURL?: string;
 }
 
 const HeroLastImage: React.FC<HeroLastImageProps> = ({
   heroId,
   imageStyle,
+  imageSrcURL,
 }) => {
   const [lastImageId, setLastImageId] = useState<number>();
   const [lastImageSrc, setLastImageSrc] = useState<string>();
@@ -22,12 +24,14 @@ const HeroLastImage: React.FC<HeroLastImageProps> = ({
   }, [heroId]);
 
   useEffect(() => {
-    if (lastImageId) {
+    if (imageSrcURL) {
+      setLastImageSrc(imageSrcURL);
+    } else if (lastImageId) {
       fetchHeroImage(lastImageId).then((blob) => {
         setLastImageSrc(URL.createObjectURL(blob));
       });
     }
-  }, [lastImageId]);
+  }, [imageSrcURL, lastImageId]);
   return (
     <>
       <div>

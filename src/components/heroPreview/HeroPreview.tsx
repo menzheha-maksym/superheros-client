@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { fetchHeroImage, fetchHeroImagesIds } from "../../api/heroAPI";
+import { fetchHeroImagesIds } from "../../api/heroAPI";
 import HeroLastImage from "../HeroLastImage";
 import styles from "./HeroPreview.module.css";
 
@@ -11,7 +11,6 @@ interface HeroPreviewProps {
 
 const HeroPreview: React.FC<HeroPreviewProps> = ({ id, nickname }) => {
   const [lastImageId, setLastImageId] = useState<number>();
-  const [lastImageSrc, setLastImageSrc] = useState<string>();
 
   const navigate = useNavigate();
 
@@ -23,19 +22,11 @@ const HeroPreview: React.FC<HeroPreviewProps> = ({ id, nickname }) => {
     });
   }, [id]);
 
-  useEffect(() => {
-    if (lastImageId) {
-      fetchHeroImage(lastImageId).then((blob) => {
-        setLastImageSrc(URL.createObjectURL(blob));
-      });
-    }
-  }, [lastImageId]);
-
   return (
     <>
       <div className={styles["container"]}>
         <div>
-          {lastImageSrc ? (
+          {lastImageId ? (
             <HeroLastImage heroId={id} imageStyle={styles["hero-image"]} />
           ) : (
             <div className={styles["image-placeholder"]}>
