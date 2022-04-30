@@ -8,7 +8,6 @@ import {
 } from "../../api/heroAPI";
 import { Hero } from "../../interfaces/Hero";
 import HeroImage from "../../components/HeroImage";
-import HeroLastImage from "../../components/HeroLastImage";
 import styles from "./HeroDetails.module.css";
 import React from "react";
 import HeroDescriptionWithActions from "../../components/heroDescription/HeroDescriptionWithActions";
@@ -26,6 +25,7 @@ const HeroDetails: React.FC<HeroDetailsProps> = () => {
   const [hero, setHero] = useState<Hero>();
   const [isEditing, setIsEditing] = useState(false);
   const [imageIds, setImageIds] = useState<number[]>();
+  const [lastImageId, setLastImageId] = useState<number>();
 
   useEffect(() => {
     fetchHeroById(Number(id)).then((hero) => {
@@ -36,6 +36,9 @@ const HeroDetails: React.FC<HeroDetailsProps> = () => {
   useEffect(() => {
     fetchHeroImagesIds(Number(id)).then((ids) => {
       setImageIds(ids);
+      if (ids) {
+        setLastImageId(ids[ids.length - 1]);
+      }
     });
   }, [id]);
 
@@ -74,7 +77,11 @@ const HeroDetails: React.FC<HeroDetailsProps> = () => {
   async function handleDeleteHeroImage(id: number) {
     try {
       await deleteHeroImage(id).then(() => {
-        setImageIds(imageIds!.filter((imageId) => imageId !== id));
+        const ids = imageIds!.filter((imageId) => imageId !== id);
+        setImageIds(ids);
+        if (!ids.includes(lastImageId!)) {
+          setLastImageId(ids[ids.length - 1]);
+        }
         console.log("deleted hero image");
       });
     } catch (err) {
@@ -96,10 +103,12 @@ const HeroDetails: React.FC<HeroDetailsProps> = () => {
             <EditHero hero={hero} />
           ) : (
             <div className={styles["details-container"]}>
-              <HeroLastImage
-                heroId={hero.id}
-                imageStyle={styles["latest-image"]}
-              />
+              {lastImageId ? (
+                <HeroImage
+                  imageId={lastImageId}
+                  imageStyle={styles["latest-image"]}
+                />
+              ) : null}
               <div>
                 <HeroDescriptionWithActions hero={hero} />
               </div>
