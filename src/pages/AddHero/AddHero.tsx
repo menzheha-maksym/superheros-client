@@ -32,8 +32,7 @@ export default function AddHero() {
           const data = new FormData();
           data.append("heroId", String(res.id));
           data.append("file", heroImg);
-          await postHeroImage(data).then((id) => {
-            //console.log(id);
+          await postHeroImage(data).then(() => {
             navigate(`/hero/${res.id}`);
           });
         }
@@ -45,63 +44,71 @@ export default function AddHero() {
 
   return (
     <div className={styles["container"]}>
-      <form onSubmit={handleSubmit} className={styles["form"]}>
-        <span>Nickname</span>
-        <input
-          type="text"
-          name="nickname"
-          value={nickname}
-          required={true}
-          onChange={(e) => setNickname(e.target.value)}
-        />
+      <div className={styles["sub-container"]}>
+        <button
+          className={styles["go-back-button"]}
+          onClick={() => navigate(`/`)}
+        >
+          GO BACK
+        </button>
+        <form onSubmit={handleSubmit} className={styles["form"]}>
+          <span>Nickname</span>
+          <input
+            type="text"
+            name="nickname"
+            value={nickname}
+            required={true}
+            onChange={(e) => setNickname(e.target.value)}
+          />
 
-        <span>Real name</span>
-        <input
-          type="text"
-          name="real_name"
-          value={real_name}
-          required={true}
-          onChange={(e) => setReal_name(e.target.value)}
-        />
+          <span>Real name</span>
+          <input
+            type="text"
+            name="real_name"
+            value={real_name}
+            required={true}
+            onChange={(e) => setReal_name(e.target.value)}
+          />
 
-        <span>Origin description</span>
-        <textarea
-          rows={4}
-          name="origin_description"
-          value={origin_description}
-          required={true}
-          onChange={(e) => setOrigin_description(e.target.value)}
-        />
+          <span>Origin description</span>
+          <textarea
+            rows={4}
+            name="origin_description"
+            value={origin_description}
+            required={true}
+            onChange={(e) => setOrigin_description(e.target.value)}
+          />
 
-        <span>Superpowers</span>
-        <textarea
-          rows={4}
-          name="superpowers"
-          value={superpowers}
-          required={true}
-          onChange={(e) => setSuperpowers(e.target.value)}
-        />
+          <span>Superpowers</span>
+          <textarea
+            rows={4}
+            name="superpowers"
+            value={superpowers}
+            required={true}
+            onChange={(e) => setSuperpowers(e.target.value)}
+          />
 
-        <span>Catch Phrase</span>
-        <textarea
-          rows={2}
-          name="superpowers"
-          value={catch_phrase}
-          required={true}
-          onChange={(e) => setCatch_phrase(e.target.value)}
-        />
+          <span>Catch Phrase</span>
+          <textarea
+            rows={2}
+            name="superpowers"
+            value={catch_phrase}
+            required={true}
+            onChange={(e) => setCatch_phrase(e.target.value)}
+          />
 
-        <span>Hero Image</span>
-        <input
-          type="file"
-          accept="image/*"
-          alt="hero"
-          name="hero_image"
-          onChange={(e) => setHeroImg(e.target.files![0])}
-        />
+          <span>Hero Image</span>
+          <input
+            type="file"
+            accept="image/*"
+            alt="hero"
+            name="hero_image"
+            onChange={(e) => setHeroImg(e.target.files![0])}
+          />
 
-        <button type="submit">Add a hero</button>
-      </form>
+          <button type="submit">Add a hero</button>
+        </form>
+      </div>
     </div>
   );
 }
