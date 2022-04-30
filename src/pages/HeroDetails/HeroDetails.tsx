@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import {
+  deleteHeroImage,
   fetchHeroById,
   fetchHeroImagesIds,
   postHeroImage,
@@ -70,6 +71,17 @@ const HeroDetails: React.FC<HeroDetailsProps> = () => {
     }
   }
 
+  async function handleDeleteHeroImage(id: number) {
+    try {
+      await deleteHeroImage(id).then(() => {
+        setImageIds(imageIds!.filter((imageId) => imageId !== id));
+        console.log("deleted hero image");
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   return (
     <>
       <div>
@@ -114,11 +126,17 @@ const HeroDetails: React.FC<HeroDetailsProps> = () => {
           {imageIds
             ? imageIds.map((id, i) => {
                 return (
-                  <HeroImage
-                    key={id}
-                    imageId={id}
-                    imageStyle={styles["hero-image"]}
-                  />
+                  <div key={id} className={styles["single-image-container"]}>
+                    <HeroImage imageId={id} imageStyle={styles["hero-image"]} />
+                    <div className={styles["delete-image-button-container"]}>
+                      <button
+                        className={styles["delete-image-button"]}
+                        onClick={() => handleDeleteHeroImage(id)}
+                      >
+                        Delete Image
+                      </button>
+                    </div>
+                  </div>
                 );
               })
             : null}

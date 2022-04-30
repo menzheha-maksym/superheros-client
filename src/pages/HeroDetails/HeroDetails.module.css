@@ -29,6 +29,31 @@ h2 {
   justify-content: space-between;
 }
 
+.single-image-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.delete-image-button-container {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 30px;
+  right: 0;
+  left: 0;
+}
+
+.delete-image-button {
+  width: 80%;
+  background-color: darkred;
+  color: wheat;
+  padding: 0.5rem;
+  border: 1px solid black;
+  border-radius: 8px;
+}
+
 .hero-image {
   padding: 1rem;
   max-width: 400px;
