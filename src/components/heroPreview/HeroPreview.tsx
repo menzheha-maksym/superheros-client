@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { fetchHeroImagesIds } from "../../api/heroAPI";
+import { fetchHeroImagesIds } from "../../api/heroImageAPI";
 import HeroLastImage from "../HeroLastImage";
 import styles from "./HeroPreview.module.css";
 

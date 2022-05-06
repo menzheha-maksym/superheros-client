@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { fetchHeroById } from "../../api/heroAPI";
 import {
-  deleteHeroImage,
-  fetchHeroById,
   fetchHeroImagesIds,
   postHeroImage,
-} from "../../api/heroAPI";
+  deleteHeroImage,
+} from "../../api/heroImageAPI";
 import { Hero } from "../../interfaces/Hero";
 import HeroImage from "../../components/HeroImage";
 import styles from "./HeroDetails.module.css";

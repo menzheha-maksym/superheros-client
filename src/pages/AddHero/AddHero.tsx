@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { postCreateHero, postHeroImage } from "../../api/heroAPI";
+import { postCreateHero } from "../../api/heroAPI";
+import { postHeroImage } from "../../api/heroImageAPI";
 import styles from "./AddHero.module.css";
 
 export default function AddHero() {

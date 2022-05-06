@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchHeroImage, fetchHeroImagesIds } from "../api/heroAPI";
+import { fetchHeroImage, fetchHeroImagesIds } from "../api/heroImageAPI";
 
 interface HeroLastImageProps {
   heroId: number;
