@@ -32,6 +32,7 @@ export default function Dashboard() {
     dispatch(fetchHerosWithPaginationAsync({ limit, skip }));
   }, [dispatch, skip]);
 
+  // pagination
   useEffect(() => {
     const currentPage = location.pathname.split("/")[1];
     // componentDidUpdate

@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { fetchHeroById } from "../../api/heroAPI";
 import {
   fetchHeroImagesIds,
   postHeroImage,
@@ -12,6 +11,12 @@ import styles from "./HeroDetails.module.css";
 import React from "react";
 import HeroDescriptionWithActions from "../../components/heroDescription/HeroDescriptionWithActions";
 import EditHero from "../../components/editHero/EditHero";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import {
+  fetchHeroByIdAsync,
+  selectHero,
+  setHero,
+} from "../../redux/reducers/heroSlice";
 
 interface HeroDetailsProps {}
 
@@ -20,18 +25,19 @@ const HeroDetails: React.FC<HeroDetailsProps> = () => {
   const navigate = useNavigate();
   const locatiton = useLocation();
 
+  const dispatch = useAppDispatch();
+  const hero = useAppSelector(selectHero);
+
   const fileInputRef = useRef<HTMLInputElement>();
 
-  const [hero, setHero] = useState<Hero>();
   const [isEditing, setIsEditing] = useState(false);
   const [imageIds, setImageIds] = useState<number[]>();
   const [lastImageId, setLastImageId] = useState<number>();
 
   useEffect(() => {
-    fetchHeroById(Number(id)).then((hero) => {
-      setHero(hero);
-    });
-  }, [id]);
+    // can just take the hero from redux store ?
+    dispatch(fetchHeroByIdAsync(Number(id)));
+  }, [dispatch, id]);
 
   useEffect(() => {
     fetchHeroImagesIds(Number(id)).then((ids) => {
@@ -48,12 +54,12 @@ const HeroDetails: React.FC<HeroDetailsProps> = () => {
       setIsEditing(true);
     } else if (thridParam === "update") {
       setIsEditing(false);
-      setHero(locatiton.state as Hero);
+      dispatch(setHero(locatiton.state as Hero));
       navigate(`/hero/${id}`, { replace: true });
     } else {
       setIsEditing(false);
     }
-  }, [locatiton, id, navigate]);
+  }, [locatiton, id, navigate, dispatch]);
 
   async function handleAddImageToHero(e: any) {
     try {
