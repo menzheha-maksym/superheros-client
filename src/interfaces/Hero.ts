@@ -5,8 +5,8 @@ export interface Hero {
   origin_description: string;
   superpowers: string;
   catch_phrase: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: Date | string;
+  updatedAt: Date | string;
 }
 
 export interface CreateHero {

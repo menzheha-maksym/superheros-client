@@ -21,4 +21,5 @@ TODO
 - [ ] rewrite unsing redux
   - [x] pagination
   - [x] dashboard
-  - [ ] hero details
+  - [x] hero details
+  - [ ] ...

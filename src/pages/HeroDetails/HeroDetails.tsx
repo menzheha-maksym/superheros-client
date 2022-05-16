@@ -1,22 +1,22 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import {
-  fetchHeroImagesIds,
-  postHeroImage,
-  deleteHeroImage,
-} from "../../api/heroImageAPI";
-import { Hero } from "../../interfaces/Hero";
-import HeroImage from "../../components/HeroImage";
-import styles from "./HeroDetails.module.css";
-import React from "react";
-import HeroDescriptionWithActions from "../../components/heroDescription/HeroDescriptionWithActions";
 import EditHero from "../../components/editHero/EditHero";
+import HeroDescriptionWithActions from "../../components/heroDescription/HeroDescriptionWithActions";
+import HeroImage from "../../components/HeroImage";
+import { Hero } from "../../interfaces/Hero";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
+  addHeroImageAsync,
+  deleteHeroImageByIdAsync,
   fetchHeroByIdAsync,
+  fetchHeroImagesIdsAsync,
+  resetHero,
   selectHero,
+  selectHeroImagesIds,
+  selectHeroLastImageId,
   setHero,
 } from "../../redux/reducers/heroSlice";
+import styles from "./HeroDetails.module.css";
 
 interface HeroDetailsProps {}
 
@@ -27,12 +27,16 @@ const HeroDetails: React.FC<HeroDetailsProps> = () => {
 
   const dispatch = useAppDispatch();
   const hero = useAppSelector(selectHero);
+  const heroImagesIds = useAppSelector(selectHeroImagesIds);
+  const lastImageId = useAppSelector(selectHeroLastImageId);
 
   const fileInputRef = useRef<HTMLInputElement>();
 
   const [isEditing, setIsEditing] = useState(false);
-  const [imageIds, setImageIds] = useState<number[]>();
-  const [lastImageId, setLastImageId] = useState<number>();
+
+  useEffect(() => {
+    dispatch(resetHero());
+  }, [dispatch]);
 
   useEffect(() => {
     // can just take the hero from redux store ?
@@ -40,13 +44,8 @@ const HeroDetails: React.FC<HeroDetailsProps> = () => {
   }, [dispatch, id]);
 
   useEffect(() => {
-    fetchHeroImagesIds(Number(id)).then((ids) => {
-      setImageIds(ids);
-      if (ids) {
-        setLastImageId(ids[ids.length - 1]);
-      }
-    });
-  }, [id]);
+    dispatch(fetchHeroImagesIdsAsync(Number(id)));
+  }, [dispatch, id]);
 
   useEffect(() => {
     const thridParam = locatiton.pathname.split("/")[3];
@@ -61,34 +60,16 @@ const HeroDetails: React.FC<HeroDetailsProps> = () => {
     }
   }, [locatiton, id, navigate, dispatch]);
 
-  async function handleAddImageToHero(e: any) {
-    try {
-      if (hero) {
-        const data = new FormData();
-        data.append("file", e.target.files[0]);
-        await postHeroImage(hero.id, data).then((res) => {
-          setLastImageId(res.id);
-          setImageIds((ids) => [...ids!, res.id]);
-        });
-      }
-    } catch (err) {
-      console.log(err);
+  function handleAddImageToHero(e: any) {
+    if (hero) {
+      const data = new FormData();
+      data.append("file", e.target.files[0]);
+      dispatch(addHeroImageAsync({ heroId: Number(id), data: data }));
     }
   }
 
-  async function handleDeleteHeroImage(id: number) {
-    try {
-      await deleteHeroImage(id).then(() => {
-        const ids = imageIds!.filter((imageId) => imageId !== id);
-        setImageIds(ids);
-        if (!ids.includes(lastImageId!)) {
-          setLastImageId(ids[ids.length - 1]);
-        }
-        console.log("deleted hero image");
-      });
-    } catch (err) {
-      console.log(err);
-    }
+  function handleDeleteHeroImage(id: number) {
+    dispatch(deleteHeroImageByIdAsync(id));
   }
 
   return (
@@ -134,8 +115,8 @@ const HeroDetails: React.FC<HeroDetailsProps> = () => {
           hidden
         />
         <div className={styles["hero-images-container"]}>
-          {imageIds
-            ? imageIds.reverse().map((id, i) => {
+          {heroImagesIds.length > 0
+            ? heroImagesIds.map((id, i) => {
                 return (
                   <div key={id} className={styles["single-image-container"]}>
                     <HeroImage imageId={id} imageStyle={styles["hero-image"]} />
