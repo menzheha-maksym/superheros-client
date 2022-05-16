@@ -16,3 +16,9 @@ TODO
   - [x] delete hero
   - [x] delete image from hero
   - [x] go back with pagination
+
+
+- [ ] rewrite unsing redux
+  - [x] pagination
+  - [x] dashboard
+  - [ ] hero details
