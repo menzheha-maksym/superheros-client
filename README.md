@@ -15,4 +15,4 @@ TODO
   - [x] edit hero
   - [x] delete hero
   - [x] delete image from hero
-  - [ ] go back with pagination
+  - [x] go back with pagination
