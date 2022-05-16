@@ -11,6 +11,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Dashboard />} />
+        <Route path="/:page" element={<Dashboard />} />
         <Route path="hero/:id" element={<HeroDetails />} />
         <Route path="hero/:id/edit" element={<HeroDetails />} />
         <Route path="hero/:id/update" element={<HeroDetails />} />

@@ -1,7 +1,10 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
+import paginationReducer from "./reducers/paginationSlice";
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    pagination: paginationReducer,
+  },
 });
 
 export type AppDispatch = typeof store.dispatch;
