@@ -5,6 +5,11 @@ import HeroPreview from "../../components/heroPreview/HeroPreview";
 import { Hero } from "../../interfaces/Hero";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
+  fetchHerosWithPaginationAsync,
+  selectAllHerosCount,
+  selectHeros,
+} from "../../redux/reducers/herosSlice";
+import {
   selectActivePage,
   selectSkip,
   setPage,
@@ -21,17 +26,13 @@ export default function Dashboard() {
 
   const activePage = useAppSelector(selectActivePage);
   const skip = useAppSelector(selectSkip);
+  const heros = useAppSelector(selectHeros);
+  const allHerosCount = useAppSelector(selectAllHerosCount);
   const dispatch = useAppDispatch();
 
-  const [heros, setHeros] = useState<Hero[]>();
-  const [itemsCount, setItemsCount] = useState<number>(0);
-
   useEffect(() => {
-    fetchHerosWithPagiantion(limit, skip).then((res) => {
-      setHeros(res.data);
-      setItemsCount(res.count);
-    });
-  }, [skip]);
+    dispatch(fetchHerosWithPaginationAsync({ limit, skip }));
+  }, [dispatch, skip]);
 
   useEffect(() => {
     const currentPage = location.pathname.split("/")[1];
@@ -74,7 +75,7 @@ export default function Dashboard() {
               );
             })}
           </div>
-          <Pagination itemsCount={itemsCount} itemsPerPage={limit} />
+          <Pagination itemsCount={allHerosCount} itemsPerPage={limit} />
         </div>
       ) : null}
     </div>
