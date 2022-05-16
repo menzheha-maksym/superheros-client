@@ -1,8 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { fetchHerosWithPagiantion } from "../../api/heroAPI";
 import HeroPreview from "../../components/heroPreview/HeroPreview";
-import { Hero } from "../../interfaces/Hero";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
   fetchHerosWithPaginationAsync,
